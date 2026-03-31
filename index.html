@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TempMail — Free Disposable Email Address</title>
+  <meta name="description" content="Generate a free temporary email address instantly. No signup required. Protect your privacy with disposable emails." />
+  <meta name="keywords" content="temporary email, disposable email, fake email, temp mail, throwaway email" />
+
+  <!-- ✅ ADSENSE: Replace with your Publisher ID after approval -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #060810;
+      --surface: #0d1117;
+      --surface2: #161b27;
+      --border: #1e2a3a;
+      --border-glow: #00e5ff33;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --accent-dim: #00e5ff22;
+      --text: #e2e8f0;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --success: #10b981;
+      --danger: #ef4444;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --shadow-glow: 0 0 40px #00e5ff18, 0 0 80px #00e5ff08;
+      --shadow-card: 0 4px 32px #00000066;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-display);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── BACKGROUND GRID ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -20%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(ellipse, #00e5ff0a 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+
+    .logo-text span {
+      color: var(--accent);
+    }
+
+    .header-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── AD SLOT TOP ── */
+    .ad-slot {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ad-slot::before {
+      content: 'AD';
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    .ad-slot-leaderboard { width: 100%; height: 90px; margin: 24px 0; }
+    .ad-slot-rectangle { width: 100%; height: 250px; margin: 24px 0; }
+    .ad-slot-sidebar { width: 100%; height: 200px; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 52px 0 40px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      opacity: 0.85;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── EMAIL BOX ── */
+    .email-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .email-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+    }
+
+    .email-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .email-display-wrap {
+      display: flex;
+      gap: 12px;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .email-display {
+      flex: 1;
+      min-width: 200px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      word-break: break-all;
+      transition: border-color 0.2s;
+    }
+
+    .email-display:hover { border-color: var(--accent); }
+
+    .email-display .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #060810;
+    }
+
+    .btn-primary:hover {
+      background: #33ecff;
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px #00e5ff44;
+    }
+
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn:active { transform: translateY(0); }
+
+    /* ── STATUS BAR ── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 #10b98155; }
+      50% { box-shadow: 0 0 0 5px #10b98100; }
+    }
+
+    .refresh-info {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    /* ── INBOX ── */
+    .inbox-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+    }
+
+    .inbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .inbox-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .inbox-count {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid var(--border-glow);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 2px 9px;
+      border-radius: 100px;
+    }
+
+    .btn-refresh {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 1px;
+    }
+
+    .btn-refresh:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-refresh.spinning svg { animation: spin 0.6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .inbox-empty {
+      padding: 60px 28px;
+      text-align: center;
+    }
+
+    .inbox-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+
+    .inbox-empty p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .inbox-empty p strong {
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    /* ── EMAIL LIST ITEMS ── */
+    .email-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .email-item:last-child { border-bottom: none; }
+    .email-item:hover { background: var(--surface2); }
+    .email-item.unread::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .email-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+    }
+
+    .email-meta { flex: 1; min-width: 0; }
+    .email-from { font-weight: 600; font-size: 0.9rem; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .email-subject { font-size: 0.85rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .email-time { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); flex-shrink: 0; }
+
+    /* ── EMAIL DETAIL MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: #06081099;
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px #00000088, var(--shadow-glow);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.25s;
+    }
+
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-subject { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .modal-from { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); }
+
+    .btn-close {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+
+    .btn-close:hover { border-color: var(--danger); color: var(--danger); }
+
+    .modal-body {
+      padding: 24px 28px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ── FEATURES SECTION ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover { border-color: var(--border-glow); transform: translateY(-2px); }
+
+    .feature-icon { font-size: 1.5rem; margin-bottom: 12px; }
+
+    .feature-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { margin: 16px 0; }
+
+    .faq-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      padding: 18px 22px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: color 0.2s;
+      user-select: none;
+    }
+
+    .faq-q:hover { color: var(--accent); }
+
+    .faq-q .faq-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.25s;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.2s;
+    }
+
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    .faq-a p {
+      padding: 0 22px 18px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--surface2);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 24px #00e5ff22;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 999;
+    }
+
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      line-height: 1.8;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── TIMER ── */
+    .timer-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .timer-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .timer-display {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    .timer-bar-wrap {
+      flex: 1;
+      min-width: 100px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .timer-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      border-radius: 2px;
+      transition: width 1s linear;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeUp 0.6s ease both; }
+    .email-box { animation: fadeUp 0.6s 0.1s ease both; }
+    .inbox-section { animation: fadeUp 0.6s 0.2s ease both; }
+
+    @media (max-width: 600px) {
+      .email-display-wrap { flex-direction: column; }
+      .btn-group { flex-direction: column; }
+      .inbox-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+      header { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <header>
+    <a class="logo" href="#">
+      <div class="logo-icon">📨</div>
+      <div class="logo-text">Temp<span>Mail</span></div>
+    </a>
+    <div class="header-badge">100% Free &amp; Anonymous</div>
+  </header>
+
+  <!-- ✅ ADSENSE SLOT #1 — Leaderboard (728×90) -->
+  <div class="ad-slot ad-slot-leaderboard">
+    <!-- Replace this entire div with your AdSense code after approval -->
+    <!--
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+         data-ad-slot="YOUR_AD_SLOT_ID"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    728×90 — AdSense Leaderboard
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">⚡ Instant &amp; Anonymous</p>
+    <h1>Your <em>Temporary</em><br/>Email, Right Now</h1>
+    <p>Generate a disposable inbox in seconds. No registration, no spam, no traces. Perfect for signups, trials, and protecting your real email.</p>
+  </div>
+
+  <!-- EMAIL BOX -->
+  <div class="email-box">
+    <div class="email-label">Your temporary email address</div>
+    <div class="email-display-wrap">
+      <div class="email-display" id="emailDisplay">
+        <span id="emailText">Generating...</span><span class="cursor"></span>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="copyEmail()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+        <button class="btn btn-secondary" onclick="generateNewEmail()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          New
+        </button>
+      </div>
+    </div>
+
+    <div class="timer-wrap">
+      <div>
+        <div class="timer-label">Expires in</div>
+        <div class="timer-display" id="timerDisplay">10:00</div>
+      </div>
+      <div class="timer-bar-wrap">
+        <div class="timer-bar" id="timerBar" style="width:100%"></div>
+      </div>
+      <button class="btn btn-secondary" onclick="generateNewEmail()" style="padding:10px 16px; font-size:0.78rem;">
+        Extend Time
+      </button>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span id="statusText">Inbox live — waiting for messages</span>
+    </div>
+    <div class="refresh-info" id="lastRefresh">Auto-refresh in 15s</div>
+  </div>
+
+  <!-- INBOX -->
+  <div class="inbox-section">
+    <div class="inbox-header">
+      <div class="inbox-title">
+        📥 Inbox
+        <span class="inbox-count" id="inboxCount">0</span>
+      </div>
+      <button class="btn-refresh" id="refreshBtn" onclick="checkInbox()">
+        <svg id="refreshIcon" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        REFRESH
+      </button>
+    </div>
+    <div id="inboxBody">
+      <div class="inbox-empty">
+        <div class="inbox-empty-icon">📭</div>
+        <p>
+          <strong>No messages yet</strong>
+          Send an email to your temporary address above and it will appear here automatically.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ ADSENSE SLOT #2 — Rectangle (300×250) -->
+  <div class="ad-slot ad-slot-rectangle">
+    <!-- Replace this entire div with your AdSense code after approval -->
+    <!--
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+         data-ad-slot="YOUR_AD_SLOT_ID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    300×250 — AdSense Rectangle
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Instant Generation</div>
+      <div class="feature-desc">Real email address created in under a second. No waiting, no verification needed.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">100% Anonymous</div>
+      <div class="feature-desc">No personal data collected. Your real identity stays hidden from spam and trackers.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">♻️</div>
+      <div class="feature-title">Auto-Expiring</div>
+      <div class="feature-desc">Emails disappear automatically. Clean up is done for you — no account management.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📨</div>
+      <div class="feature-title">Real Inbox</div>
+      <div class="feature-desc">Actually receives emails with live auto-refresh. No fakes, no placeholders.</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="faq-title">Frequently Asked Questions</div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What is a temporary email address?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        <p>A temporary (or disposable) email is a short-lived inbox you can use instead of your real email. It lets you sign up for websites, receive verification codes, or access gated content without exposing your personal email to spam.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How long does the email last?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        <p>Each email address is valid for 10 minutes by default. You can click "Extend Time" to generate a fresh address anytime. Emails received in the inbox are available for a limited period.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is this service completely free?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        <p>Yes! TempMail is 100% free to use. No signup, no credit card, no hidden fees. The service is supported by non-intrusive advertising.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I use this to register on important sites?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        <p>We recommend only using temporary emails for low-stakes registrations, trials, and one-time verifications. Do not use them for banking, medical, or other critical services — you won't be able to recover the address.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ ADSENSE SLOT #3 — Footer Rectangle -->
+  <div class="ad-slot ad-slot-rectangle">
+    <!--
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+         data-ad-slot="YOUR_AD_SLOT_ID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    300×250 — AdSense Rectangle #2
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 TempMail — Free Disposable Email Service</p>
+    <p>Powered by <a href="https://www.1secmail.com" target="_blank">1secMail API</a> &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Use</a></p>
+    <p style="margin-top:8px; font-size:0.65rem; opacity:0.5;">This service is for legitimate temporary use only. Do not use for illegal activities.</p>
+  </footer>
+
+</div>
+
+<!-- EMAIL DETAIL MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-subject" id="modalSubject">—</div>
+        <div class="modal-from" id="modalFrom">—</div>
+      </div>
+      <button class="btn-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">Loading...</div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">✓ Copied to clipboard!</div>
+
+<script>
+  // ── STATE ──
+  let currentEmail = '';
+  let currentLogin = '';
+  let currentDomain = '';
+  let messages = [];
+  let refreshInterval = null;
+  let countdownInterval = null;
+  let refreshCountdown = 15;
+  let timerSeconds = 600; // 10 minutes
+  let timerInterval = null;
+
+  const API = 'https://www.1secmail.com/api/v1/';
+  const CORS = 'https://api.allorigins.win/get?url=';
+
+  // ── INIT ──
+  window.addEventListener('DOMContentLoaded', () => {
+    generateNewEmail();
+  });
+
+  // ── GENERATE EMAIL ──
+  async function generateNewEmail() {
+    document.getElementById('emailText').textContent = 'Generating...';
+    clearIntervals();
+
+    try {
+      const url = API + '?action=genRandomMailbox&count=1';
+      const res = await fetch(url);
+      const data = await res.json();
+      currentEmail = data[0];
+      const parts = currentEmail.split('@');
+      currentLogin = parts[0];
+      currentDomain = parts[1];
+    } catch (e) {
+      // Fallback: generate locally with known domains
+      const domains = ['1secmail.com', '1secmail.org', '1secmail.net'];
+      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      let login = '';
+      for (let i = 0; i < 10; i++) login += chars[Math.floor(Math.random() * chars.length)];
+      currentDomain = domains[Math.floor(Math.random() * domains.length)];
+      currentLogin = login;
+      currentEmail = login + '@' + currentDomain;
+    }
+
+    document.getElementById('emailText').textContent = currentEmail;
+    messages = [];
+    renderInbox();
+    startRefreshLoop();
+    startTimerCountdown();
+    startRefreshCountdown();
+  }
+
+  // ── CHECK INBOX ──
+  async function checkInbox() {
+    if (!currentLogin) return;
+    const btn = document.getElementById('refreshBtn');
+    btn.classList.add('spinning');
+
+    try {
+      const url = `${API}?action=getMessages&login=${currentLogin}&domain=${currentDomain}`;
+      const res = await fetch(url);
+      messages = await res.json();
+      renderInbox();
+      updateStatus(`${messages.length} message${messages.length !== 1 ? 's' : ''} — last checked just now`);
+    } catch (e) {
+      updateStatus('Could not reach server — retrying...');
+    }
+
+    btn.classList.remove('spinning');
+    refreshCountdown = 15;
+  }
+
+  // ── RENDER INBOX ──
+  function renderInbox() {
+    const body = document.getElementById('inboxBody');
+    document.getElementById('inboxCount').textContent = messages.length;
+
+    if (!messages.length) {
+      body.innerHTML = `
+        <div class="inbox-empty">
+          <div class="inbox-empty-icon">📭</div>
+          <p><strong>No messages yet</strong>Send an email to your temporary address above and it will appear here automatically.</p>
+        </div>`;
+      return;
+    }
+
+    body.innerHTML = messages.map((msg, i) => `
+      <div class="email-item unread" onclick="readEmail(${msg.id})">
+        <div class="email-avatar">${(msg.from || '?')[0].toUpperCase()}</div>
+        <div class="email-meta">
+          <div class="email-from">${escHtml(msg.from || 'Unknown')}</div>
+          <div class="email-subject">${escHtml(msg.subject || '(no subject)')}</div>
+        </div>
+        <div class="email-time">${formatTime(msg.date)}</div>
+      </div>
+    `).join('');
+  }
+
+  // ── READ EMAIL ──
+  async function readEmail(id) {
+    document.getElementById('modalSubject').textContent = 'Loading...';
+    document.getElementById('modalFrom').textContent = '';
+    document.getElementById('modalBody').textContent = 'Fetching message...';
+    openModal();
+
+    try {
+      const url = `${API}?action=readMessage&login=${currentLogin}&domain=${currentDomain}&id=${id}`;
+      const res = await fetch(url);
+      const msg = await res.json();
+
+      document.getElementById('modalSubject').textContent = msg.subject || '(no subject)';
+      document.getElementById('modalFrom').textContent = `From: ${msg.from}  ·  ${msg.date}`;
+      document.getElementById('modalBody').textContent =
+        msg.textBody || msg.htmlBody?.replace(/<[^>]+>/g, '') || '(empty message)';
+    } catch (e) {
+      document.getElementById('modalBody').textContent = 'Could not load this message.';
+    }
+  }
+
+  // ── MODAL ──
+  function openModal() { document.getElementById('modalOverlay').classList.add('open'); }
+  function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); }
+  function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
+
+  // ── COPY ──
+  function copyEmail() {
+    if (!currentEmail) return;
+    navigator.clipboard.writeText(currentEmail).then(() => {
+      showToast('✓ Copied to clipboard!');
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = currentEmail;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('✓ Copied!');
+    });
+  }
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── TIMER (10 min countdown) ──
+  function startTimerCountdown() {
+    timerSeconds = 600;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      timerSeconds--;
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval);
+        generateNewEmail();
+        return;
+      }
+      const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+      const s = (timerSeconds % 60).toString().padStart(2, '0');
+      document.getElementById('timerDisplay').textContent = `${m}:${s}`;
+      document.getElementById('timerBar').style.width = (timerSeconds / 600 * 100) + '%';
+    }, 1000);
+  }
+
+  // ── AUTO REFRESH LOOP ──
+  function startRefreshLoop() {
+    clearInterval(refreshInterval);
+    refreshInterval = setInterval(checkInbox, 15000);
+    checkInbox();
+  }
+
+  function startRefreshCountdown() {
+    clearInterval(countdownInterval);
+    refreshCountdown = 15;
+    countdownInterval = setInterval(() => {
+      refreshCountdown--;
+      document.getElementById('lastRefresh').textContent =
+        refreshCountdown <= 0 ? 'Refreshing...' : `Auto-refresh in ${refreshCountdown}s`;
+      if (refreshCountdown <= 0) refreshCountdown = 15;
+    }, 1000);
+  }
+
+  function clearIntervals() {
+    clearInterval(refreshInterval);
+    clearInterval(countdownInterval);
+    clearInterval(timerInterval);
+  }
+
+  // ── STATUS ──
+  function updateStatus(text) {
+    document.getElementById('statusText').textContent = text;
+  }
+
+  // ── FAQ TOGGLE ──
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── HELPERS ──
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function formatTime(dateStr) {
+    if (!dateStr) return '';
+    try {
+      const d = new Date(dateStr);
+      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } catch { return dateStr; }
+  }
+</script>
+
+</body>
+</html>
